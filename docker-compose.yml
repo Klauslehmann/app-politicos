@@ -1,0 +1,28 @@
+#version: '3.8'
+services:
+    mysql:
+      image: "mysql:latest"
+      container_name: mysql
+      ports:
+        - '1234:3306'
+      expose:
+        - '3306'   
+      environment:
+        MYSQL_ROOT_PASSWORD: ${ROOT_PASS}
+        MYSQL_USER: klaus
+        MYSQL_PASSWORD: ${USER_PASS}
+        #MYSQL_DATABASE: votaciones
+      volumes:
+        - ./data/data_vol:/var/lib/mysql
+        - ./configuracion:/etc/mysql/conf.d 
+    
+    app:
+      container_name: app-congreso
+      build: .
+      ports: 
+        - '8010:8000'
+      volumes:
+        - ./.env:/app-congreso/.env
+# Nombre para el volumen
+volumes:
+  my-db:

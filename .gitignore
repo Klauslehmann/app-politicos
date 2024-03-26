@@ -1,0 +1,9 @@
+data/
+venv/
+__pycache__/
+.Rhistory
+.Rproj.user/
+.env
+testear.py
+scripts/
+app-politicos.Rproj
