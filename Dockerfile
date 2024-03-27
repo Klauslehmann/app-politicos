@@ -14,5 +14,5 @@ RUN pip3 install -r requirements.txt
 
 COPY app.py /app-congreso/app.py
 
-CMD [ "gunicorn", "--workers=5", "--threads=1", "-b 0.0.0.0:8000", "app:server"]
+CMD [ "gunicorn", "--workers=1", "--threads=1", "-b 0.0.0.0:8000", "app:server"]
 
