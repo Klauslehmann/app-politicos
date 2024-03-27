@@ -35,7 +35,7 @@ jobs:
         with:
           host: ${{ secrets.DEPLOY_HOST }}
           username: ${{ secrets.DEPLOY_USERNAME }}
-          KEY: ${{ secrets.DEPLOY_PASSWORD }}
+          key: ${{ secrets.DEPLOY_PASSWORD }}
           script: |
             cd /home/app-politicos
             docker compose   -f docker-compose.prod.yml up  app -d --build
