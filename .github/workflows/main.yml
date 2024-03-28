@@ -47,7 +47,7 @@ jobs:
           # https://stackoverflow.com/a/70447517
         run: |
             install -m 600 -D /dev/null ~/.ssh/id_rsa
-            echo "V3MUPVyGhkfKrdjFrN27LKh5wyCfajM9MNyd2p+xjKO6w7h7f5hAjeO6o4soifARxkaD/Ed4qpQ3kswLg5+MN9roV6yK2b2JTvaJVT6su30SJrAd8fugIP05dRjp15DUYQW5bXeRcuuGmfVuqhMeUCYkqqw/IVirbLc1YlBhOqqqOyNWE0kRSg/eB1c3cUChk6jfqdYJGkATdTrK7cZohoG54HII8XK3U+/5mRfaDZNWL88alUufcwJjWUR6AYpVSxNleDXhRY3LBXJSMa4wU+KAxuWyHDNBn/aXcM4SyUvvka2G/W1DyOjsK/Bq8D4ZHQEASTP5VsKGolydGRLIAgiMugfCIKfvi002ShjvNOFyAw/6xCNXLS3lWfFc3XAP3tbHA87xLia0J3udA9jONLVGFls5hwqBEFAPoMC5hqkt0OFtUjT74O2Ajo1k0wJYZuzEAINdhdeLvRkFlI7d+jbmlll3mw== root@ubuntu-s-2vcpu-2gb-sfo3-0" > ~/.ssh/id_rsa
+            echo ${{ secrets.DEPLOY_PASSWORD }} > ~/.ssh/id_rsa
             #ssh-keyscan -H ${{ secrets.DEPLOY_HOST }} > ~/.ssh/known_hosts
             ssh-keyscan -H 143.198.64.143  > ~/.ssh/known_hosts           
       - name: connect and deploy
