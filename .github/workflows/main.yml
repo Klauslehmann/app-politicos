@@ -30,13 +30,26 @@ jobs:
           push: true
           tags: ${{ secrets.DOCKERHUB_USERNAME }}/app-congreso:latest
 
-      - name: conectar via ssh y desplegar usando compose productivo sobre archivo productivo
-        uses: appleboy/ssh-action@v0.1.5
-        with:
-          host: ${{ secrets.DEPLOY_HOST }}
-          username: ${{ secrets.DEPLOY_USERNAME }}
-          key: ${{ secrets.DEPLOY_PASSWORD }}
-          port: 22
-          script: |
-            cd /home/app-politicos
-            docker compose   -f docker-compose.prod.yml up  app -d --build
+      #- name: conectar via ssh y desplegar usando compose productivo sobre archivo productivo
+      #  uses: appleboy/ssh-action@v0.1.5
+      #  with:
+      #    host: ${{ secrets.DEPLOY_HOST }}
+      #    username: ${{ secrets.DEPLOY_USERNAME }}
+      #    key: ${{ secrets.DEPLOY_PASSWORD }}
+      #    port: 22
+      #    script: |
+      #      cd /home/app-politicos
+      #      docker compose   -f docker-compose.prod.yml up  app -d --build
+
+
+      - name: install ssh keys
+          # check this thread to understand why its needed:
+          # https://stackoverflow.com/a/70447517
+        run: |
+            install -m 600 -D /dev/null ~/.ssh/id_rsa
+            echo "${{ secrets.DEPLOY_PASSWORD }}" > ~/.ssh/id_rsa
+            ssh-keyscan -H ${{ secrets.DEPLOY_HOST }} > ~/.ssh/known_hosts
+      - name: connect and deploy
+        run: ssh ${{ secrets.DEPLOY_USERNAME }}@${{ secrets.DEPLOY_HOST }} "cd /home/app-politicos &&  docker compose -f docker-compose.prod.yml up app -d --build  && exit"
+      - name: cleanup
+        run: rm -rf ~/.ssh
