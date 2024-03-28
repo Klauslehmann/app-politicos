@@ -48,7 +48,7 @@ jobs:
         run: |
           install -m 600 -D /dev/null ~/.ssh/id_rsa  
           echo "${{ secrets.DEPLOY_PASSWORD }}" > ~/.ssh/id_rsa
-          ssh-keyscan -H ${{ secrets.DEPLOY_HOST }} > ~/.ssh/known_hosts           
+          ssh-keyscan -H 143.198.64.143 > ~/.ssh/known_hosts           
       - name: connect and deploy
         run: ssh root@143.198.64.143 "cd /home/app-politicos &&  docker compose -f docker-compose.prod.yml up app -d --build  && exit"
       - name: cleanup
