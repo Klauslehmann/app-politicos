@@ -75,7 +75,7 @@ app.layout = html.Div([
 
     html.Div([
     dcc.Graph(id='1d-nominate')
-            ] , style={'width': '49%', 'display': 'inline-block', 'padding': '0 20'} )
+            ] , style={'width': '49%',  'display': 'inline-block', 'padding': '0 20'} )
 
             ])
 
@@ -158,7 +158,19 @@ def update_first_tab(dropdown_año):
                  }
 
     )
+    
+    fig1.update_layout(
+        yaxis = dict(
+            tickfont = dict(size=15)
+                    ),
+        xaxis = dict(
+            tickfont = dict(size=15)
+                    ),
+        title = dict(
+             font=dict(size=20)
+            )    
 
+    )
 
     df2 = pd.read_sql(sql=f"SELECT party, coord1D, coord2D \
                       from votaciones.nominateByYear \
@@ -173,6 +185,19 @@ def update_first_tab(dropdown_año):
         color="party",
         height=500,
         title="Posicionamiento políticos W-NOMINATE 2D",
+
+    )
+
+    fig2.update_layout(
+        yaxis = dict(
+            tickfont = dict(size=15)
+                    ),
+        xaxis = dict(
+            tickfont = dict(size=15)
+                    ),
+        title = dict(
+             font=dict(size=20)
+            )    
 
     )
 
@@ -201,6 +226,23 @@ def update_first_tab(dropdown_año):
         }
 
     )
+
+
+    fig3.update_layout(
+        yaxis = dict(
+            tickfont = dict(size=15)
+                    ),
+        xaxis = dict(
+            tickfont = dict(size=15)
+                    ),
+        title = dict(
+             font=dict(size=20)
+            )    
+
+    )
+
+
+
     return fig1, fig2 , fig3
 
 
