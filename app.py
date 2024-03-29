@@ -151,6 +151,12 @@ def update_first_tab(dropdown_año):
         x=valores_y_ordenados,
         height=500,
         title="Posicionamiento partidos W-NOMINATE 1D",
+
+        labels={
+                     "x": "NOMINATE",
+                     "y": "",
+                 }
+
     )
 
 
@@ -167,6 +173,7 @@ def update_first_tab(dropdown_año):
         color="party",
         height=500,
         title="Posicionamiento políticos W-NOMINATE 2D",
+
     )
 
 
@@ -186,22 +193,17 @@ def update_first_tab(dropdown_año):
         height=1000,
         color = "party",
         title="Posicionamiento político NOMINATE 1D",
-        category_orders={"name": df4["name"].tolist()}
+        category_orders={"name": df4["name"].tolist()},
+
+        labels = {
+            "coord1D" : "NOMINATE", 
+            "name" : ""  
+        }
+
     )
     return fig1, fig2 , fig3
 
 
-def highlight_search_term(row, search_term):
-    regex = re.compile(re.escape(search_term), re.IGNORECASE)
-    return [
-        {'if': {'column_id': 'text'},
-         'backgroundColor': 'yellow',
-         'color': 'black',
-         'fontWeight': 'bold'}
-        if regex.search(str(row['text'])) else {'if': {'column_id': 'text'},
-                                                        'backgroundColor': 'white',
-                                                        'color': 'black'}
-    ]
 
 @app.callback(
     Output('tabla1-pestaña2', 'data'),
