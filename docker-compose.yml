@@ -19,10 +19,25 @@ services:
     app:
       container_name: app-congreso
       build: .
-      ports: 
-        - '8010:8000'
+      #ports: 
+      #  - '8010:8000'
+      expose:
+        - '8000'
       volumes:
         - ./.env:/app-congreso/.env
+
+
+    nginx:
+      image: nginx:latest
+      container_name: nginx
+      volumes:
+      #  - ./flask_app/app/static:/home/app-censo/app/static
+        - ./nginx/nginx.conf:/etc/nginx/nginx.conf:ro
+      ports:
+        - 1111:80
+      depends_on:
+        - app
+
 # Nombre para el volumen
 volumes:
   my-db:
