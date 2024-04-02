@@ -23,7 +23,7 @@ services:
       #  - '8010:8000'
       expose:
         - '8000'
-      volumes:
+      volumes:   
         - ./.env:/app-congreso/.env
 
 
