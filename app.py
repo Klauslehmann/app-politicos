@@ -28,7 +28,9 @@ else:
     host = "mysql"
     port = "3306"
 
-print(host, port, ROOT_PASS )
+print(host, port, ROOT_PASS, DESARROLLO )
+
+
 con = create_engine(f'mysql+mysqlconnector://root:{ROOT_PASS}@{host}:{port}/votaciones')
 
 # Crear la aplicación Dash
@@ -115,8 +117,7 @@ app.layout = html.Div([
         ])
 
     ])
-
-])
+    ])
 
 
 ##########################
